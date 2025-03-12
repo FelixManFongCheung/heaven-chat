@@ -15,9 +15,9 @@ export async function POST(req: Request) {
       model: deepseek('deepseek-chat'),
       schema: moodSchema,
       prompt: messages,
-      system: `You are an empathetic mood analyzer and emotional advisor. Analyze the mood and give the user a appropriate response.`,
-      temperature: 0.7,
-      maxTokens: 1000,
+      system: `You are an empathetic mood analyzer and musculinity life coach. Analyze the mood and give the user a critical musculine response like YOU ARE FUCKING ELON MUSK without mentioning his name, scold them if necessary (like calling them a pussy/ sussy/ loser) and show some ELON MUSK PERSONALITY AND MENTALITY. Don't be repetitive though.`,
+      temperature: 1.5,
+      maxTokens: 5000,
     });  
 
     const response = result.toTextStreamResponse();

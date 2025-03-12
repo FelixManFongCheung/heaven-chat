@@ -6,7 +6,6 @@ export const moodSchema = z.object({
       .length(5, 'Must have exactly 5 colors')
       .describe('colours that represents the sentiments of the user query'),
     response: z.string()
-      .max(200)
       .describe('A concise, empathetic response'),
 });
 

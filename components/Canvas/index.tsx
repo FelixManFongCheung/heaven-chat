@@ -13,7 +13,7 @@ export default function Canvas() {
     const { colours } = useColour();
 
     useGSAP(() => {
-        gsap.registerPlugin(MotionPathPlugin);        
+        gsap.registerPlugin(MotionPathPlugin);                
 
         if (blobsRef.current.length > 0 && pathRef.current) {
             const tl = gsap.timeline({repeat: -1});
