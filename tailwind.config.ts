@@ -34,9 +34,8 @@ const config: Config = {
         '4xl': '2rem',
       },
     },
-    // Override existing theme
     screens: {
-      'sm': '640px',
+      'sm': '468px',
       'md': '768px',
       'lg': '1024px',
       'xl': '1280px',

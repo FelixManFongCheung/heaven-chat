@@ -11,7 +11,7 @@ export default function Chat() {
   const { renderColours } = useColour();
 
 
-  const { object, submit, error } = useObject({
+  const { object, submit, error, isLoading } = useObject({
     api: '/api/query',
     schema: moodSchema,
     onFinish: (data) => {
@@ -26,6 +26,9 @@ export default function Chat() {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();   
       submit(input);
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
     }
   }
   return (
@@ -34,11 +37,18 @@ export default function Chat() {
         <input 
           ref={inputRef}
           onChange={e => setInput(e.target.value)} 
-          className="w-[80vw] h-auto p-1 border-2 border-[#c1c1c1] rounded-sm" 
+          className={`w-[80vw] 
+            h-auto 
+            p-1 
+            border-2 
+            border-[#c1c1c1] 
+            rounded-sm 
+            ${isLoading && 'bg-gradient-to-r from-[#c0c0c0] via-[#ffffff] to-[#c0c0c0] bg-[size:200%_100%] bg-[position:0%_0] animate-shimmer opacity-30'}`}
           placeholder="Press Enter to submit"
+          disabled={isLoading}
         />
       </form>
-      <div className='flex-1'>
+      <div className='flex-1 p-2'>
         <div className="">
           {object?.response}
         </div>
