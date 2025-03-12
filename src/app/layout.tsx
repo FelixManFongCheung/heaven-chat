@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientWrapper from "@/components/ClientWrapper";
+import { ColourContextProvider } from '@/context/ColourContext';
+import Canvas from "@/components/Canvas";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientWrapper>
+        <ColourContextProvider>
+          <Canvas />
           {children}
-        </ClientWrapper>
+        </ColourContextProvider>
       </body>
     </html>
   );
