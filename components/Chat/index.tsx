@@ -35,11 +35,11 @@ export default function Chat() {
   }
   return (
     <>
-      <form onKeyDown={handleKeyDown} className="flex flex-row w-[100vw] h-auto justify-center items-center mt-2">
+      <form onKeyDown={handleKeyDown} className="flex flex-row w-[100%] h-auto justify-center items-center mt-2">
         <input 
           ref={inputRef}
           onChange={e => setInput(e.target.value)} 
-          className={`w-[80vw] 
+          className={`w-[80%] 
             h-auto 
             p-1 
             border-2 
