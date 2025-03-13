@@ -1,34 +1,43 @@
 'use client'
 
-import { useContext, createContext, ReactNode, useState, useCallback } from "react";
+import { useContext, createContext, ReactNode, useState, Dispatch, SetStateAction, useMemo } from "react";
 
-type ColourContextType = {
-    colours: string[],
-    renderColours: (colours: string[]) => void
+// Define interface instead of type for better extensibility
+interface ColourContextType {
+    colours: string[];
+    setColours: Dispatch<SetStateAction<string[]>>;
 }
 
-const ColourContext = createContext<ColourContextType>({} as ColourContextType);
-
+// Provide better initial value
 const initialColours: string[] = ['red', 'blue', 'green'];
 
-export const ColourContextProvider = ({children} : {children: ReactNode}) => {
+const ColourContext = createContext<ColourContextType | null>(null);
+
+export const ColourContextProvider = ({ children }: { children: ReactNode }) => {
     const [colours, setColours] = useState<string[]>(initialColours);
 
-    const renderColours = useCallback((newColours: string[]) => {
-        setColours(newColours);
-    }, []);
+    const value = useMemo(()=>({colours, setColours}), [colours])
 
-    return(
-        <ColourContext.Provider value={{colours, renderColours}}>
+    return (
+        <ColourContext.Provider value={value}>
             {children}
         </ColourContext.Provider>
-    )
-}
+    );
+};
 
-export const useColour = () => {
+// Custom hook with better error handling
+export const useColour = (): ColourContextType => {
     const context = useContext(ColourContext);
-    if (!context) {
-        throw new Error('useColour must be used within a ColourContextProvider')
+    
+    if (context === null) {
+        throw new Error(
+            'useColour must be used within a ColourContextProvider. ' +
+            'Please check if the component is wrapped in ColourContextProvider.'
+        );
     }
+    
     return context;
-}
+};
+
+// Optional: Export the context if needed elsewhere
+export { ColourContext };

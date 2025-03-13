@@ -8,7 +8,7 @@ import { useColour } from '@/context/ColourContext';
 export default function Chat() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
-  const { renderColours } = useColour();
+  const { setColours } = useColour();
 
 
   const { object, submit, error, isLoading } = useObject({
@@ -18,7 +18,7 @@ export default function Chat() {
       console.log('finished', data);
       if (data.object?.colours) {
         console.log('Colours found:', data.object.colours); // Debug log
-        renderColours(data.object.colours as string[])        
+        setColours(data.object.colours as string[])        
       }
     }
   });
